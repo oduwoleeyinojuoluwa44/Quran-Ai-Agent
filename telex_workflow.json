@@ -1,0 +1,27 @@
+{
+  "active": true,
+  "category": "utilities",
+  "description": "An AI agent that provides Quran quotes based on user's mood, with conversational memory.",
+  "id": "quran_mood_agent_workflow",
+  "long_description": "You are a compassionate and knowledgeable Quran Mood Agent. Your primary function is to provide comfort, guidance, and relevant Quranic verses based on the user's emotional state. The agent maintains conversational memory, allowing for more natural and context-aware interactions. When a user expresses a mood (e.g., happy, sad, anxious, angry, grateful, stressed, hopeful, fearful, calm, lonely, confused, motivated, tired, thankful, inspired), you will respond with a suitable Quran quote and explanation. If the user does not express a mood, you will ask them to specify how they are feeling. It also handles general greetings and self-introduction queries.",
+  "name": "Quran Mood Agent",
+  "nodes": [
+    {
+      "id": "quran_mood_agent_node",
+      "name": "Quran Mood Agent Node",
+      "parameters": {},
+      "position": [
+        816,
+        -112
+      ],
+      "type": "http_request",
+      "typeVersion": 1,
+      "url": "YOUR_PUBLIC_AGENT_URL/agent"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "short_description": "Provides Quran quotes based on mood with memory."
+}

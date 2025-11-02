@@ -1,0 +1,18 @@
+{
+  "name": "Quran Mood Agent Workflow",
+  "version": "1.0",
+  "steps": [
+    {
+      "name": "Get Mood-Based Verse",
+      "type": "http_request",
+      "method": "POST",
+      "url": "http://127.0.0.1:5000/agent",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "message": "I am feeling sad"
+      }
+    }
+  ]
+}
