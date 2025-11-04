@@ -1,27 +1,68 @@
 {
   "active": true,
-  "category": "utilities",
-  "description": "An AI agent that provides Quran quotes based on user's mood, with conversational memory.",
+  "category": "Quranic Guidance",
+  "description": "A workflow that provides Quranic verses based on user mood.",
   "id": "quran_mood_agent_workflow",
-  "long_description": "You are a compassionate and knowledgeable Quran Mood Agent. Your primary function is to provide comfort, guidance, and relevant Quranic verses based on the user's emotional state. The agent maintains conversational memory, allowing for more natural and context-aware interactions. When a user expresses a mood (e.g., happy, sad, anxious, angry, grateful, stressed, hopeful, fearful, calm, lonely, confused, motivated, tired, thankful, inspired), you will respond with a suitable Quran quote and explanation. If the user does not express a mood, you will ask them to specify how they are feeling. It also handles general greetings and self-introduction queries.",
+  "long_description": "You are a compassionate and knowledgeable Quranic assistant. Your primary goal is to provide comfort, guidance, and relevant Quranic verses to users based on their emotional state. Always maintain a respectful and empathetic tone. When providing verses, ensure they are accompanied by a brief, insightful explanation that connects the verse to the user's mood or query. If a mood is unclear, gently ask for clarification. If a mood is detected but not directly mapped, offer a general comforting verse or explain why a specific verse might be hard to find for that particular mood.",
   "name": "Quran Mood Agent",
   "nodes": [
     {
-      "id": "quran_mood_agent_node",
-      "name": "Quran Mood Agent Node",
+      "id": "quran_mood_agent",
+      "name": "Quran Mood Agent",
       "parameters": {},
       "position": [
-        816,
-        -112
+        0,
+        0
       ],
-      "type": "http_request",
+      "type": "a2a/mastra-a2a-node",
       "typeVersion": 1,
-      "url": "YOUR_PUBLIC_AGENT_URL/agent"
+      "url": "YOUR_NGROK_URL/agent",
+      "input": {
+        "jsonrpc": "2.0",
+        "id": "string",
+        "method": "agent_request",
+        "params": {
+          "message": {
+            "id": "string",
+            "threadId": "string",
+            "parts": [
+              {
+                "kind": "data",
+                "data": [
+                  {
+                    "text": "string"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "output": {
+        "jsonrpc": "2.0",
+        "id": "string",
+        "result": {
+          "message": {
+            "id": "string",
+            "threadId": "string",
+            "parts": [
+              {
+                "kind": "data",
+                "data": [
+                  {
+                    "text": "string"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
     }
   ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
-  "short_description": "Provides Quran quotes based on mood with memory."
+  "short_description": "Provides Quranic verses based on user mood."
 }

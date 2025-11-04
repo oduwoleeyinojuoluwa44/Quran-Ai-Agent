@@ -1,0 +1,8 @@
+README.md
+app.py
+pyproject.toml
+quran_mood_agent.egg-info/PKG-INFO
+quran_mood_agent.egg-info/SOURCES.txt
+quran_mood_agent.egg-info/dependency_links.txt
+quran_mood_agent.egg-info/requires.txt
+quran_mood_agent.egg-info/top_level.txt

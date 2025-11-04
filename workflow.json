@@ -1,18 +1,134 @@
 {
-  "name": "Quran Mood Agent Workflow",
-  "version": "1.0",
-  "steps": [
+  "name": "Quran Mood Agent",
+  "description": "A compassionate Quranic assistant that provides relevant verses based on user's emotional state, compatible with Telex A2A protocol.",
+  "endpoints": [
     {
-      "name": "Get Mood-Based Verse",
-      "type": "http_request",
+      "path": "/",
       "method": "POST",
-      "url": "http://127.0.0.1:5000/agent",
-      "headers": {
-        "Content-Type": "application/json"
+      "description": "Telex A2A JSON-RPC endpoint for agent communication.",
+      "jsonrpc": {
+        "methods": [
+          {
+            "name": "message/send",
+            "description": "Sends a user message to the agent for mood detection and Quranic response.",
+            "params": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "role": { "type": "string", "enum": ["user"] },
+                    "parts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": { "type": "string", "enum": ["text"] },
+                          "text": { "type": "string" }
+                        },
+                        "required": ["type", "text"]
+                      }
+                    }
+                  },
+                  "required": ["role", "parts"]
+                }
+              },
+              "required": ["message"]
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "role": { "type": "string", "enum": ["agent"] },
+                "parts": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": { "type": "string", "enum": ["text"] },
+                      "text": { "type": "string" }
+                    },
+                    "required": ["type", "text"]
+                  }
+                },
+                "kind": { "type": "string", "enum": ["message"] },
+                "message_id": { "type": "string" }
+              },
+              "required": ["role", "parts", "kind", "message_id"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "/agent",
+      "method": "POST",
+      "description": "Generic endpoint for non-Telex applications to get a Quranic response.",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string", "description": "The user's message or mood." }
+              },
+              "required": ["message"]
+            }
+          }
+        }
       },
-      "body": {
-        "message": "I am feeling sad"
+      "responses": {
+        "200": {
+          "description": "Successful response with mood and Quranic verse.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenericResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request - No clear message received.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": { "type": "string" },
+                  "code": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Internal Server Error.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": { "type": "string" },
+                  "code": { "type": "integer" }
+                }
+              }
+            }
+          }
+        }
       }
     }
-  ]
+  ],
+  "components": {
+    "schemas": {
+      "GenericResponse": {
+        "type": "object",
+        "properties": {
+          "response": { "type": "string" },
+          "mood": { "type": "string" },
+          "source": { "type": "string" }
+        },
+        "required": ["response", "mood"]
+      }
+    }
+  }
 }

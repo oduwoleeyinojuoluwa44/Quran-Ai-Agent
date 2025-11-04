@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: quran-mood-agent
+Version: 0.1.0
+Summary: An A2A Quran Mood Agent built with Python and FastAPI
+License-Expression: MIT
+Requires-Python: >=3.10
+Requires-Dist: fastapi==0.115.0
+Requires-Dist: uvicorn==0.29.0
+Requires-Dist: pydantic==2.7.1
+Requires-Dist: pydantic-settings==2.2.1
+Requires-Dist: google-generativeai==0.7.0
+Requires-Dist: python-dotenv==1.0.1
+Requires-Dist: requests==2.31.0
+Requires-Dist: beautifulsoup4==4.12.3
